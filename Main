@@ -1,0 +1,42 @@
+package com.mensajeria.usuarios.mensajeria;
+
+import usuarios.mensajeria.gui.Registro;
+
+import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
+import org.eclipse.paho.client.mqttv3.MqttException;
+
+public class App {
+
+	// Método para conectar y suscribirse a los tópicos MQTT
+	public static MqttClient conectarMQTT(String clientId, String broker, String[] topics) {
+		MqttClient client = null;
+		try {
+			// Crear cliente MQTT.
+			client = new MqttClient(broker, clientId, null);
+			MqttConnectOptions options = new MqttConnectOptions();
+			options.setCleanSession(true);
+			client.connect(options);
+
+			// Suscribirse al topic.
+			for (String topic : topics) {
+				System.out.println("Suscribiéndome al topic: " + topic);
+				client.subscribe(topic, (topicReceived, message) -> {
+					@SuppressWarnings("unused")
+					String payload = new String(message.getPayload()); // Mensaje recibido.
+				});
+			}
+		} catch (MqttException e) {
+			System.err.println("Error al conectar o suscribirse al broker MQTT: " + e.getMessage());
+			e.printStackTrace();
+		}
+		return client;
+	}
+
+	public static void main(String[] args) {
+		// Inicializar la aplicación desde la ventana de Registro.
+		javax.swing.SwingUtilities.invokeLater(() -> {
+			new Registro().setVisible(true);
+		});
+	}
+}
