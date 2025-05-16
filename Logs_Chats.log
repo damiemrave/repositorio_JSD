@@ -1,0 +1,10 @@
+[2025-05-16 09:17:58] [canal: proyecto/general] sergio_dev: ¿Tenéis lista la documentación?
+[2025-05-16 09:18:12] [canal: proyecto/general] damiem_user: Sí, ya estoy con los diagramas.
+[2025-05-16 09:18:25] [canal: proyecto/general] sergio_dev: Genial, así lo incluimos todo en el mismo documento.
+
+[2025-05-16 09:18:57] [canal: proyecto/usuarios] josito_admin: He terminado la lógica de autenticación.
+[2025-05-16 09:19:14] [canal: proyecto/usuarios] damiem_user: Perfecto, así ya podemos probar el inicio de sesión.
+[2025-05-16 09:19:39] [canal: proyecto/usuarios] josito_admin: Acordaos de encriptar las contraseñas con BCrypt.
+
+[2025-05-16 09:20:05] [canal: privado/sergio_damiem] sergio_dev: ¿Puedes revisar los nombres de las clases?
+[2025-05-16 09:20:28] [canal: privado/sergio_damiem] damiem_user: Claro, en 5 minutos te digo algo.
