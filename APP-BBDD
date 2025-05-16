@@ -1,0 +1,82 @@
+package com.mensajeria.usuarios.mensajeria;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class Conexion { // Datos de conexión desde el código a la Base de Datos.
+	private static final String url = "jdbc:mysql://usuarios.cvsrttuxq01g.us-east-1.rds.amazonaws.com:3306/usuarios";
+	private static final String user = "admin";
+	private static final String contra = "Cagada66-";
+
+	public static Connection conectar() throws SQLException {
+		return DriverManager.getConnection(url, user, contra); // Conexión a la Base de Datos.
+	}
+
+}
+
+
+UsuarioService (métodos de automatización de la bbdd)
+
+package com.mensajeria.usuarios.mensajeria;
+
+import java.sql.*;
+import at.favre.lib.crypto.bcrypt.BCrypt;
+
+public class UsuarioService {
+
+	public static boolean validarUsuario(String usuario, String contraseña) {
+		String sql = "SELECT contraseña FROM usuarios WHERE usuario = ?"; // Línea de código para validar si el usuario introducido se encuentra dentro de la base de datos.
+
+		try (Connection con = Conexion.conectar();
+				PreparedStatement stm = con.prepareStatement(sql)) {
+
+			stm.setString(1, usuario);
+			ResultSet rs = stm.executeQuery();
+
+			if (rs.next()) {
+				String storedHash = rs.getString("contraseña");
+				BCrypt.Result result = BCrypt.verifyer().verify(contraseña.toCharArray(), storedHash); // Se encripta la Contraseña para mayor Seguridad en la Base de Datos.
+				return result.verified;
+			} else {
+				return false; 
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	public static boolean insertarUsuario(String nombre, String apellido_1, String correo, String usuario, String contraseña) {
+		String hashedPassword = BCrypt.withDefaults().hashToString(12, contraseña.toCharArray());
+		String sql = "INSERT INTO usuarios (nombre, apellido, correo, usuario, contraseña) VALUES (?, ?, ?, ?, ?)"; // Línea de Código para registrar el Usuario con los Datos Pasados a la Base de Datos.
+
+		try (Connection conn = Conexion.conectar();
+				PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+			stmt.setString(1, nombre);
+			stmt.setString(2, apellido_1);
+			stmt.setString(3, correo);
+			stmt.setString(4, usuario);
+			stmt.setString(5, hashedPassword);
+
+			stmt.executeUpdate();
+			return true;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+
+	public static boolean contraseñaValida(String contraseña) { // Comprobamos los Requisitos Mínimos para la Seguridad de la Contraseña.
+		return contraseña.length() >= 8 &&
+				contraseña.length() <= 24 &&
+				contraseña.matches(".*[-+*ç\\\\_;&].*");
+	}
+}
+
+ 
+
