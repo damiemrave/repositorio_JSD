@@ -1,0 +1,19 @@
+[2025-05-16 09:12:34] Usuario 'sergio_dev' registrado exitosamente.
+[2025-05-16 09:13:08] Usuario 'josito_admin' registrado exitosamente.
+[2025-05-16 09:14:27] Usuario 'damiem_user' registrado exitosamente.
+
+[2025-05-16 09:15:03] Usuario 'sergio_dev' inició sesión.
+[2025-05-16 09:15:17] Usuario 'josito_admin' inició sesión.
+[2025-05-16 09:15:49] Usuario 'damiem_user' inició sesión.
+
+[2025-05-16 09:16:12] Usuario 'sergio_dev' se suscribió al canal 'proyecto/general'.
+[2025-05-16 09:16:45] Usuario 'damiem_user' se suscribió al canal 'proyecto/general'.
+[2025-05-16 09:17:03] Usuario 'josito_admin' se suscribió al canal 'proyecto/usuarios'.
+
+[2025-05-16 09:17:58] Usuario 'sergio_dev' envió un mensaje a 'proyecto/general': "¿Tenéis lista la documentación?"
+[2025-05-16 09:18:23] Usuario 'damiem_user' respondió en 'proyecto/general': "Sí, ya estoy con los diagramas."
+[2025-05-16 09:18:57] Usuario 'josito_admin' envió un mensaje a 'proyecto/usuarios': "He terminado la lógica de autenticación."
+
+[2025-05-16 09:21:05] Usuario 'sergio_dev' cerró sesión.
+[2025-05-16 09:21:17] Usuario 'damiem_user' cerró sesión.
+[2025-05-16 09:21:34] Usuario 'josito_admin' cerró sesión.
